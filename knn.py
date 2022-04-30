@@ -1,5 +1,6 @@
 import sys
 import statistics
+import math
 class datapoint:
 	def __init__(data,label,value):
 		self.data=data
@@ -36,7 +37,7 @@ class Knn:
 	def add_training_data(self,datapt):
 		self.trainingdata.append(datapt)
 		return
-	def classify(datapoint):
+	def classify(self,datapoint):
 		distarr = []
 		def find_nearest_k(datapoint):
 			def myfunc(t):
@@ -52,6 +53,18 @@ class Knn:
 		label = statistics.mode(labelarray)
 		return label
 def main():
+	k = int(sys.argv[3])
+	train = sys.argv[1]
+	test = open(sys.argv[2])
+	def dist(x,y):
+		sum_of_sq=0
+		for i in range(len(x.data)):
+			sum_of_sq += pow(x.data[i]-y.data[i],2) 
+		distance = math.sqrt(sum_of_sq)
+		return distance
+
+	knn_train = Knn(train,k,dist)
+
 
 
 
